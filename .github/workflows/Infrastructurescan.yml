@@ -20,9 +20,7 @@ jobs:
           echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
           sudo apt-get update
           sudo apt-get install trivy
-
-          tar zxvf trivy_$(uname -s)_$(uname -m).tar.gz
-          sudo mv trivy /usr/local/bin/
+          
           trivy --version
 
       - name: Scan IaC files with Trivy
