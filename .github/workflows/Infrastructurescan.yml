@@ -1,34 +1,25 @@
-name: 'wiz-cli'
-on: [pull_request,push]
+name: Trivy IaC Scan
+
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  wiz-cli-iac-scan:
-    name: 'trivy IaC Scan'
+  security_scan:
     runs-on: ubuntu-latest
-    env:
-      SCAN_PATH: "./" # Set the relative path in the repo to scan
-      POLICY: "Default IaC policy" # Set the desired Wiz-cli policy to use
-      #WIZ_ENV: "test"
-      NAME: "https://github.com/kolizo12/eksterraform"
-
-    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
-    defaults:
-      run:
-        shell: bash
 
     steps:
-    # Checkout the repository to the GitHub Actions runner
-    - name: Check out repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Download Wiz-cli
-      run: curl -o wizcli https://wizcli.app.wiz.io/wizcli && chmod +x wizcli
+      - name: Install Trivy
+        run: |
+          wget https://github.com/aquasecurity/trivy/releases/latest/download/trivy_$(uname -s)_$(uname -m).tar.gz
+          tar zxvf trivy_$(uname -s)_$(uname -m).tar.gz
+          sudo mv trivy /usr/local/bin/
+          trivy --version
 
-    - name: Authenticate to Wiz
-      run: ./wizcli auth --id "$WIZ_CLIENT_ID" --secret "$WIZ_CLIENT_SECRET"
-      env:
-        WIZ_CLIENT_ID: ${{ secrets.WIZ_CLIENT_ID }}
-        WIZ_CLIENT_SECRET: ${{ secrets.WIZ_CLIENT_SECRET }}
-
-    - name: Run wiz-cli IaC scan
-      run: ./wizcli iac scan --path "${{env.SCAN_PATH}}" --name "${{env.NAME}}" --policy "${{env.POLICY}}"
+      - name: Scan IaC files with Trivy
+        run: |
+          trivy config dev
