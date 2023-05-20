@@ -29,7 +29,10 @@ cd /Users/kolizo/EKSTERRAFORM/environments/dev/vpc
 ##lets test this
 
 `echo "username=kola" > usefile.txt`
+
 `echo "jhbdcbjdc" > password.txt`
+
 `echo "apikey=Asuncviibkjbskd_njhbdjc_djbcjhd" > apikey.txt`
+
 `echo "Base64encoderedsecret=U1RSSU5H" > base.txt`
 
