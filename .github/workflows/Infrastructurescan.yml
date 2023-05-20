@@ -1,26 +1,34 @@
-name: build
+name: 'wiz-cli'
 on: [pull_request,push]
+
 jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-20.04
+  wiz-cli-iac-scan:
+    name: 'trivy IaC Scan'
+    runs-on: ubuntu-latest
+    env:
+      SCAN_PATH: "./" # Set the relative path in the repo to scan
+      POLICY: "Default IaC policy" # Set the desired Wiz-cli policy to use
+      #WIZ_ENV: "test"
+      NAME: "https://github.com/kolizo12/eksterraform"
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    # Checkout the repository to the GitHub Actions runner
+    - name: Check out repository
+      uses: actions/checkout@v2
 
-      - name: Run Trivy vulnerability scanner in IaC mode
-        uses: aquasecurity/trivy-action@master
-        with:
-          scan-type: 'config'
-          scan-ref: "dev"
-          hide-progress: false
-          format: 'sarif'
-          output: 'trivy-results.sarif'
-          exit-code: '1'
-          ignore-unfixed: true
-          severity: 'CRITICAL,HIGH,MEDIUM,LOW'
+    - name: Download Wiz-cli
+      run: curl -o wizcli https://wizcli.app.wiz.io/wizcli && chmod +x wizcli
 
-      - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: 'trivy-results.sarif'
+    - name: Authenticate to Wiz
+      run: ./wizcli auth --id "$WIZ_CLIENT_ID" --secret "$WIZ_CLIENT_SECRET"
+      env:
+        WIZ_CLIENT_ID: ${{ secrets.WIZ_CLIENT_ID }}
+        WIZ_CLIENT_SECRET: ${{ secrets.WIZ_CLIENT_SECRET }}
+
+    - name: Run wiz-cli IaC scan
+      run: ./wizcli iac scan --path "${{env.SCAN_PATH}}" --name "${{env.NAME}}" --policy "${{env.POLICY}}"
