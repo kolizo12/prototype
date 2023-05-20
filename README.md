@@ -22,7 +22,7 @@ It validates the outgoing changeset for things that look suspicious - such as po
 cd /Users/kolizo/EKSTERRAFORM/environments/dev/vpc
 
 ## as a pre-push hook
-~/install-talisman.sh
+`~/install-talisman.sh`
 ## or as a pre-commit hook
 `~/install-talisman.sh pre-commit`
 
