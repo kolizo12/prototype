@@ -36,4 +36,3 @@ cd /Users/kolizo/EKSTERRAFORM/environments/dev/vpc
 
 `echo "Base64encoderedsecret=U1RSSU5H" > base.txt`
 
-#github actions engaged
