@@ -5,24 +5,24 @@ There is a tendency that `git init` will create a large file and wont be able to
 
 #Install tailman to check for secret and password and prevent a push to the git repo
 
-# Download the talisman installer script
+ Download the talisman installer script
 Talisman is a tool that installs a hook to your repository to ensure that potential secrets or sensitive information do not leave the developer's workstation.
 
 It validates the outgoing changeset for things that look suspicious - such as potential SSH keys, authorization tokens, private keys etc.
 
 
-curl https://thoughtworks.github.io/talisman/install.sh > ~/install-talisman.sh
-chmod +x ~/install-talisman.sh
+`curl https://thoughtworks.github.io/talisman/install.sh > ~/install-talisman.sh`
+`chmod +x ~/install-talisman.sh`
 
-# Install to a single project
-#cd my-git-project
+## Install to a single project
+cd my-git-project
 cd /Users/kolizo/EKSTERRAFORM/environments/dev/vpc
-# as a pre-push hook
+## as a pre-push hook
 ~/install-talisman.sh
-# or as a pre-commit hook
-~/install-talisman.sh pre-commit
+## or as a pre-commit hook
+`~/install-talisman.sh pre-commit`
 
-#lets test this
+##lets test this
 echo "username=kola" > usefile.txt
 echo "jhbdcbjdc" > password.txt
 echo "apikey=Asuncviibkjbskd_njhbdjc_djbcjhd" > apikey.txt
