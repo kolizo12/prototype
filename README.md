@@ -18,6 +18,7 @@ It validates the outgoing changeset for things that look suspicious - such as po
 
 ## Install to a single project
 `cd my-git-project`
+
 cd /Users/kolizo/EKSTERRAFORM/environments/dev/vpc
 
 ## as a pre-push hook
