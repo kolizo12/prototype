@@ -1,24 +1,32 @@
-# name: build
-# on: [pull_request,push]
-# jobs:
-#   build:
-#     name: Build
-#     runs-on: ubuntu-20.04
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v3
+# name: Trivy IaC Scan
 
-#       - name: Run Trivy vulnerability scanner in IaC mode
-#         uses: aquasecurity/trivy-action@master
-#         with:
-#           scan-type: 'config'
-#           scan-ref: "dev"
-#           hide-progress: false
-#           format: 'sarif'
-#           output: 'trivy-results.sarif'
-#           exit-code: '1'
-#           ignore-unfixed: true
-#           severity: 'CRITICAL,HIGH,MEDIUM,LOW'
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   security_scan:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v2
+
+#       - name: Install Trivy
+#         run: |
+#           sudo apt-get install wget apt-transport-https gnupg lsb-release
+#           wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+#           echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
+#           sudo apt-get update
+#           sudo apt-get install trivy
+          
+#           trivy --version
+
+#       - name: Scan IaC files with Trivy
+#         run: |
+#           trivy config dev
+
 name: "Terraform action"
 on:
   push:
