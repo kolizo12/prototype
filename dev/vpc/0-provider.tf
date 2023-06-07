@@ -1,6 +1,6 @@
 provider "aws" {
-region = "us-east-2"
-alias  = "virginia"
+  region = "us-east-2"
+  alias  = "virginia"
 }
 
 
@@ -8,7 +8,7 @@ terraform {
   # required_version = ">= 1.4.6"
 
   backend "s3" {
-    
+
   }
   required_providers {
     aws = {

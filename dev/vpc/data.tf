@@ -8,7 +8,7 @@ data "aws_eks_cluster_auth" "this" {
 
 data "aws_caller_identity" "current" {}
 
-# To Authenticate with ECR Public in us-east-1
-data "aws_ecrpublic_authorization_token" "token" {
-  provider = aws.virginia
-}
+# # To Authenticate with ECR Public in us-east-1
+# data "aws_ecrpublic_authorization_token" "token" {
+#   provider = aws.virginia
+# }
