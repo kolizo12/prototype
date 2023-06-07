@@ -5,7 +5,7 @@ alias  = "virginia"
 
 
 terraform {
-  required_version = ">= 1.4"
+  required_version = ">= 1.4.6"
 
   backend "s3" {
     path = "dev/vpc/terraform.tfstate"
