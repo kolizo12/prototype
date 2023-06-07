@@ -46,7 +46,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: .
+        working-directory: .dev/vpc
     steps:
       - name: Git checkout
         uses: actions/checkout@v3
