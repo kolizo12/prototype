@@ -18,6 +18,7 @@ jobs:
 
       - name: Terraform Init
         id: init
+        working-directory: dev/vpc
         run: terraform init  
         
       - name: Show Destroy plan
