@@ -12,12 +12,12 @@ jobs:
             - name: list and READmde files
               run: |
                echo "My first github Action job"
-               ls - ltra
+               ls -ltra
                cat README.md
             
             - name: GENERATE ASCII Artwork
               run: cowsay -f dragon "Run for cover, I am a DRAGON...RAWR" >> dragon.txt
-              
+
             # - name: List files
             #   run: ls
 
