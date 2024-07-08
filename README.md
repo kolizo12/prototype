@@ -1,6 +1,11 @@
 Just run terraform init 
 terraform apply
 
+karpenter.tf
+karpenterpolicy.tf
+main.tf
+nodepool.tf
+
 ![image](https://github.com/kolizo12/prototype/assets/20117523/6081f084-b1e1-44f9-969d-0c6e5d824c38)
 
 Based on my test nodes are created outside of node group and they will be managed by the karpenter node pools... Since karpenter bypasses the ASG and talks to EC2 API  the aspect of Managed node groups is only referenced in EKS hence karpenter doesnt respect this.
