@@ -49,14 +49,19 @@ provider "kubectl" {
 
 locals {
   name                   = "demo"
-  region                 = "us-west-2"
+  region                 = "us-west-1"
   node_iam_role_name     = module.eks.eks_managed_node_groups["initial"].iam_role_name
   vpc_cidr               = "10.0.0.0/16"
   vpc_id                 = module.vpc.vpc_id
   irsa_ebs_csi_role_name = "AmazonEKSTFEBSCSIRole-${local.name}"
   aws_account_id         = data.aws_caller_identity.current.account_id
+  oidc_endpoint       = module.eks.cluster_oidc_issuer_url
+  aws_partition       = "aws"
+  karpenter_namespace = "kube-system"
 
-  azs = slice(data.aws_availability_zones.available.names, 0, 3)
+
+
+  azs = slice(data.aws_availability_zones.available.names, 0, 2)
 
   tags = {
     Blueprint  = local.name
@@ -104,6 +109,7 @@ module "eks" {
   cluster_endpoint_private_access = false
   vpc_id                          = module.vpc.vpc_id
   subnet_ids                      = module.vpc.private_subnets
+
   eks_managed_node_groups = {
     initial = {
       ami_type = "AL2023_x86_64_STANDARD"
@@ -126,6 +132,10 @@ module "eks" {
       min_size     = 1
       max_size     = 5
       desired_size = 3
+
+     iam_role_additional_policies = { policy = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore",}
+
+
     }
   }
   manage_aws_auth_configmap = true

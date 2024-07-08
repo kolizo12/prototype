@@ -48,7 +48,7 @@ spec:
           values: ["4", "8", "16", "32", "48", "64"]
         - key: karpenter.sh/capacity-type
           operator: In
-          values: ["spot", "on-demand"]
+          values: ["on-demand"]
         - key: karpenter.k8s.aws/instance-category
           operator: In
           values: ["c", "m", "r", "i", "d"]
