@@ -1,10 +1,16 @@
 Just run terraform init 
 terraform apply
 
+The files in play here are listed below
+
 karpenter.tf
+
 karpenterpolicy.tf
+
 main.tf
+
 nodepool.tf
+
 
 ![image](https://github.com/kolizo12/prototype/assets/20117523/6081f084-b1e1-44f9-969d-0c6e5d824c38)
 
