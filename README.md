@@ -7,6 +7,7 @@ Based on my test nodes are created outside of node group and they will be manage
 
 what comes in play here is the node pool 
 
+```
 kolizo@KOLAWOLEs-MacBook-Pro-2 prototype % k get po                                      
 NAME                       READY   STATUS    RESTARTS   AGE
 inflate-75d744d4c6-2pf9m   1/1     Running   0          26m
@@ -27,3 +28,4 @@ inflate-75d744d4c6-p8xrv   1/1     Running   0          13m
 inflate-75d744d4c6-pgjdg   1/1     Running   0          13m
 inflate-75d744d4c6-q4qd2   1/1     Running   0          13m
 inflate-75d744d4c6-srr64   1/1     Running   0          13m
+```
