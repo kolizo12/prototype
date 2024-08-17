@@ -45,13 +45,13 @@ spec:
           values: ["amd64", "arm64"]
         - key: karpenter.k8s.aws/instance-cpu
           operator: In
-          values: ["4", "8", "16", "32", "48", "64"]
+          values: ["2", "4", "8", "16"]  # Smaller instances
         - key: karpenter.sh/capacity-type
           operator: In
-          values: ["on-demand"]
+          values: ["spot", "on-demand"]  # Include spot instances
         - key: karpenter.k8s.aws/instance-category
           operator: In
-          values: ["c", "m", "r", "i", "d"]
+          values: ["t", "m", "c", "r"]  # Add t instances (cheaper)
       nodeClassRef:
         name: default
         apiVersion: karpenter.k8s.aws/v1beta1

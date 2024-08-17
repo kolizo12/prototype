@@ -70,7 +70,7 @@ data "aws_iam_policy_document" "node_assume_role_policy" {
           ],
           Condition = {
             StringEquals = {
-              "aws:RequestTag/kubernetes.io/cluster/${local.name}" = "owned",
+              "aws:RequestTag/kubernetes.io/clfuster/${local.name}" = "owned",
               "aws:RequestTag/topology.kubernetes.io/region"       = local.region
             },
             StringLike = {

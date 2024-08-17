@@ -118,7 +118,7 @@ module "eks" {
         # Used to ensure Karpenter runs on nodes that it does not manage
         "karpenter.sh/controller" = "true"
       }
-      instance_types = ["m5.large"]
+      instance_types = ["t2.medium"]
       taints = {
         # The pods that do not tolerate this taint should run on nodes
         # created by Karpenter
@@ -130,8 +130,8 @@ module "eks" {
       }
 
       min_size     = 1
-      max_size     = 5
-      desired_size = 3
+      max_size     = 3
+      desired_size = 1
 
      iam_role_additional_policies = { policy = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore",}
 
